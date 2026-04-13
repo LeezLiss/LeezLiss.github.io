@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>LeezLiss | «Не жди идеального момента. Сделай момент идеальным.»</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', 'Inter', 'Montserrat', system-ui, sans-serif;
+            background-color: #0a0000;
+            color: #f0f0f0;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        .animated-crimson-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: #030000;
+            overflow: hidden;
+        }
+
+        .diagonal-wave {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                115deg,
+                transparent,
+                transparent 40%,
+                rgba(180, 20, 20, 0.25) 45%,
+                rgba(220, 30, 30, 0.55) 50%,
+                rgba(180, 20, 20, 0.25) 55%,
+                transparent 60%,
+                transparent 100%
+            );
+            animation: slideDiagonal 12s infinite linear;
+            pointer-events: none;
+        }
+
+
+        .diagonal-wave-slow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                65deg,
+                transparent,
+                transparent 55%,
+                rgba(140, 10, 10, 0.2) 58%,
+                rgba(200, 40, 40, 0.4) 62%,
+                rgba(140, 10, 10, 0.2) 66%,
+                transparent 70%,
+                transparent 100%
+            );
+            animation: slideDiagonalReverse 18s infinite linear;
+            pointer-events: none;
+        }
+
+        .crimson-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 40%, rgba(180, 20, 20, 0.15) 0%, transparent 70%);
+            animation: pulseRed 6s infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes slideDiagonal {
+            0% {
+                transform: translate(0%, 0%) rotate(0deg);
+            }
+            100% {
+                transform: translate(10%, 8%) rotate(3deg);
+            }
+        }
+
+        @keyframes slideDiagonalReverse {
+            0% {
+                transform: translate(0%, 0%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-8%, -5%) rotate(-2deg);
+            }
+        }
+
+        @keyframes pulseRed {
+            0% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0.6;
+                transform: scale(1.05);
+            }
+        }
+
+        .dark-veil {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1.8rem 4rem 1.8rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 2rem 1rem 1.5rem 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .special-title {
+            font-family: 'Times New Roman', 'Georgia', 'Palatino', serif;
+            font-size: clamp(3rem, 14vw, 7rem);
+            font-weight: 800;
+            font-style: italic;
+            letter-spacing: 0.02em;
+            background: linear-gradient(135deg, #ffffff, #ffaaaa, #cc3333, #ff6666, #ffffff);
+            background-size: 300% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: titleRedFlow 4s ease infinite alternate;
+            display: inline-block;
+            text-shadow: 0 0 15px rgba(220, 40, 40, 0.6);
+        }
+
+        @keyframes titleRedFlow {
+            0% {
+                background-position: 0% 50%;
+                text-shadow: 0 0 5px rgba(200, 30, 30, 0.4);
+            }
+            100% {
+                background-position: 100% 50%;
+                text-shadow: 0 0 20px rgba(255, 60, 60, 0.8);
+            }
+        }
+
+        .sub {
+            font-size: 1rem;
+            letter-spacing: 3px;
+            opacity: 0.85;
+            margin-top: 0.5rem;
+            color: #ffc0c0;
+        }
+
+        .cards-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0 3rem 0;
+        }
+
+        .game-card {
+            background: rgba(8, 3, 3, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            padding: 2rem;
+            width: 100%;
+            max-width: 460px;
+            border: 1px solid rgba(200, 60, 60, 0.5);
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 35px -12px black;
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 80, 80, 0.9);
+            background: rgba(20, 5, 5, 0.85);
+            box-shadow: 0 0 22px rgba(220, 40, 40, 0.4);
+        }
+
+        .card-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 5px solid #cc4444;
+            padding-left: 1rem;
+            color: #ffdddd;
+        }
+
+        .info-line {
+            margin: 1rem 0;
+            font-size: 1.05rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: baseline;
+            border-bottom: 1px dashed rgba(200, 80, 80, 0.3);
+            padding-bottom: 0.6rem;
+        }
+
+        .badge {
+            background: rgba(180, 40, 40, 0.25);
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(220, 70, 70, 0.3);
+        }
+
+        .highlight {
+            color: #ffaaaa;
+            font-weight: 600;
+        }
+
+        .contacts-section {
+            margin: 3rem 0 2.5rem 0;
+            background: rgba(20, 5, 5, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            border: 1px solid rgba(200, 60, 60, 0.4);
+        }
+
+        .contacts-title {
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: #ffcccc;
+        }
+
+        .contact-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(30, 10, 10, 0.8);
+            padding: 0.6rem 1.4rem;
+            border-radius: 60px;
+            border: 1px solid rgba(200, 60, 60, 0.5);
+            transition: 0.2s;
+        }
+
+        .contact-item:hover {
+            border-color: #ff6666;
+            background: #2a0a0a;
+            transform: scale(1.02);
+        }
+
+        .contact-icon {
+            font-size: 1.6rem;
+        }
+
+        .contact-text {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        a.contact-link {
+            text-decoration: none;
+            color: #ffe0e0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .main-quote {
+            text-align: center;
+            font-size: 1.5rem;
+            font-style: italic;
+            padding: 2rem 1rem;
+            margin: 2rem 0 1.5rem;
+            background: rgba(30, 5, 5, 0.55);
+            border-radius: 3rem;
+            border-left: 6px solid #cc4444;
+            border-right: 6px solid #aa3333;
+            backdrop-filter: blur(5px);
+            color: #ffeaea;
+        }
+
+        .quote-author {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-style: normal;
+            color: #ffaaaa;
+        }
+
+        .extra-quotes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.8rem;
+            margin: 2rem 0 1rem;
+        }
+
+        .quote-card {
+            background: rgba(20, 5, 5, 0.7);
+            backdrop-filter: blur(8px);
+            padding: 1.4rem 1.8rem;
+            border-radius: 2rem;
+            max-width: 380px;
+            flex: 1;
+            text-align: center;
+            font-style: italic;
+            font-size: 1.05rem;
+            border: 1px solid rgba(200, 60, 60, 0.4);
+            transition: 0.2s;
+        }
+
+        .quote-card:hover {
+            border-color: #ff7777;
+            background: #2a0c0ccc;
+            transform: translateY(-4px);
+        }
+
+        .quote-icon {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            font-size: 0.7rem;
+            opacity: 0.7;
+            color: #ccaaaa;
+        }
+
+        @media (max-width: 760px) {
+            .container {
+                padding: 1.2rem;
+            }
+            .main-quote {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="animated-crimson-bg">
+    <div class="diagonal-wave"></div>
+    <div class="diagonal-wave-slow"></div>
+    <div class="crimson-glow"></div>
+</div>
+<div class="dark-veil"></div>
+
+<main class="container">
+    <div class="hero">
+        <div class="special-title">𝙻𝚎𝚎𝚣𝙻𝚒𝚜𝚜</div>
+        <div class="sub">✦ «Не жди идеального момента. Сделай момент идеальным» ✦</div>
+    </div>
+
+
+    <div class="cards-row">
+        <div class="game-card">
+            <div class="card-title">
+                <span>🔫</span> CS:GO 2
+            </div>
+            <div class="info-line">
+                <span>⏱️ Стаж:</span>
+                <span class="badge">Полгода активной игры</span>
+            </div>
+            <div class="info-line">
+                <span>🗺️ Любимые карты:</span>
+                <span class="badge">Mirage</span>
+                <span class="badge">Dust 2</span>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <div class="card-title">
+                <span>⛏️</span> Майнкрафт
+            </div>
+            <div class="info-line">
+                <span>📆 Стаж:</span>
+                <span class="badge">12 лет!</span>
+            </div>
+            <div class="info-line">
+                <span>🧱 Блоков сломано:</span>
+                <span class="highlight">> 100 000 000</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="contacts-section">
+        <div class="contacts-title">📬 Мои контакты</div>
+        <div class="contact-icons">
+            <div class="contact-item">
+                <a href="https://t.me/kaliiv0" target="_blank" class="contact-link" rel="noopener noreferrer">
+                    <span class="contact-icon">📱</span>
+                    <span class="contact-text">Telegram: @kaliiv0</span>
+                </a>
+            </div>
+            <div class="contact-item">
+                <div class="contact-link" style="cursor: default;">
+                    <span class="contact-icon">🎮</span>
+                    <span class="contact-text">Discord: blaacktea</span>
+                </div>
+            </div>
+        </div>
+        <p style="font-size: 0.8rem; margin-top: 1rem; opacity: 0.8;">✨ Добавляйся, всегда рада новым тиммейтам ✨</p>
+    </div>
+
+
+    <div class="main-quote">
+        «Не важно, как медленно ты идёшь, главное — не останавливаться»
+        <div class="quote-author">— LeezLiss</div>
+    </div>
+
+    <div class="extra-quotes">
+        <div class="quote-card">
+            <div class="quote-icon">💬</div>
+            <div>«Если не отвечаю — значит, на миде. Или в пещере с алмазами»</div>
+        </div>
+        <div class="quote-card">
+            <div class="quote-icon">🎮</div>
+            <div>«Я не играю в игры — я живу в них. И выигрываю»</div>
+        </div>
+    </div>
+
+    <footer>
+        ⚡ LeezLiss | «Играю, пока горят экраны» ⚡
+    </footer>
+</main>
+
+<script>
+    (function() {
+        const wave = document.querySelector('.diagonal-wave');
+        const waveSlow = document.querySelector('.diagonal-wave-slow');
+
+        if (wave && waveSlow) {
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth) - 0.5;
+                const y = (e.clientY / window.innerHeight) - 0.5;
+
+                const moveX = x * 12;
+                const moveY = y * 8;
+                wave.style.transform = `translate(${moveX * 0.5}px, ${moveY * 0.3}px) rotate(${x * 2}deg)`;
+                waveSlow.style.transform = `translate(${-moveX * 0.3}px, ${-moveY * 0.2}px) rotate(${-x * 1.5}deg)`;
+            });
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            .diagonal-wave, .diagonal-wave-slow {
+                transition: transform 0.15s ease-out;
+            }
+        `;
+        document.head.appendChild(style);
+    })();
+</script>
+</body>
+</html>
